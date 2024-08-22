@@ -24,7 +24,8 @@ resource "spacelift_stack" "stack" {
 
   dynamic "ansible" {
     for_each = (
-      var.ansible != null && var.ansible != {} && (var.terraform_version == null || var.terraform_version == "")) ? [var.ansible] : []
+      var.ansible != null && var.ansible != {} && (var.terraform_version == null || var.terraform_version == "")
+    ) ? [var.ansible] : []
     content {
       playbook = ansible.value.playbook
     }

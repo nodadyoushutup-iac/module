@@ -50,10 +50,6 @@ variable "terraform_version" {
   description = "Terraform version to use for the stack."
   type        = string
   default     = null
-  validation {
-    condition     = local.invalid_config
-    error_message = "The 'terraform_version' cannot be set if 'ansible' is configured."
-  }
 }
 
 variable "labels" {
