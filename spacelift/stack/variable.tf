@@ -68,7 +68,7 @@ variable "context_priority" {
 variable "github_enterprise" {
   description = "Configuration for GitHub Enterprise integration."
   type = object({
-    namespace = optional(string, "nodadyoushutup-terraform")
+    namespace = optional(string, "nodadyoushutup-iac")
   })
   default = null
 }
