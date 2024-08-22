@@ -21,7 +21,6 @@ resource "spacelift_stack" "stack" {
 }
 
 resource "spacelift_context_attachment" "config" {
-  count = try(spacelift_stack.stack) ? 1 : 0
   context_id = "config"
   stack_id   = var.name
   priority   = var.context_priority
