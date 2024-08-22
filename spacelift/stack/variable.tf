@@ -70,6 +70,7 @@ variable "github_enterprise" {
   type = object({
     namespace = optional(string, "nodadyoushutup-terraform")
   })
+  default = null
 }
 
 variable "ansible" {
@@ -77,5 +78,6 @@ variable "ansible" {
   type = object({
     playbook = optional(string, null)
   })
+  default = null
 }
 
