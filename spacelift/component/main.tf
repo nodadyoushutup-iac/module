@@ -1,11 +1,19 @@
 # INFRA
 
+locals {
+  stack = lookup(local.config.stack, var.component, null)
+}
+
+output "stack" {
+  value = local.stack
+}
+
 module "infra" {
     source  = "spacelift.io/nodadyoushutup/stack/spacelift"
     count = try(contains(local.config.component, var.component)) ? 1 : 0
 
     # REQUIRED
-    name = try(local.config.stack.database.name, concat(var.component, "_infra"))
+    name = try(concat(var.component, "_infra"), null)
     repository = try(local.config.stack.database.repository, var.component)
 
     # UNIQUE
