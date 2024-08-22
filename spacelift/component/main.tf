@@ -6,6 +6,13 @@ module "infra" {
   # REQUIRED
   name = try(local.stack.infra.name, "${var.component}_infra")
   repository = try(local.stack.infra.repository, var.component)
+  branch = try(
+      try(
+        local.stack.infra.branch, 
+        local.config.global.stack.branch
+      ), 
+      null
+  )
 
   # UNIQUE
   description = try(
@@ -17,15 +24,15 @@ module "infra" {
   )
   project_root = try(
       try(
-      local.stack.infra.project_root, 
-      local.config.global.stack.project_root
+        local.stack.infra.project_root, 
+        local.config.global.stack.project_root
       ), 
       "infra"
   )
   labels = try(
       try(
-      concat(local.stack.infra.labels, ["infra", var.component]), 
-      concat(local.config.global.stack.labels, ["infra", var.component])
+        concat(local.stack.infra.labels, ["infra", var.component]), 
+        concat(local.config.global.stack.labels, ["infra", var.component])
       ),
       ["infra", var.component]
   )
@@ -33,43 +40,37 @@ module "infra" {
   # OPTIONAL
   space_id = try(
       try(
-      local.stack.infra.space_id, 
-      local.config.global.stack.space_id
+        local.stack.infra.space_id, 
+        local.config.global.stack.space_id
       ), 
       null
   )
   administrative = try(
       try(
-      local.stack.infra.administrative, 
-      local.config.global.stack.administrative
+        local.stack.infra.administrative, 
+        local.config.global.stack.administrative
       ), 
       null
   )
   autodeploy = try(
       try(
-      local.stack.infra.autodeploy, 
-      local.config.global.stack.autodeploy
+        local.stack.infra.autodeploy, 
+        local.config.global.stack.autodeploy
       ), 
       null
   )
-  branch = try(
-      try(
-      local.stack.infra.branch, 
-      local.config.global.stack.branch
-      ), 
-      null
-  )
+  
   terraform_version = try(
       try(
-      local.stack.infra.terraform_version, 
-      local.config.global.stack.terraform_version
+        local.stack.infra.terraform_version, 
+        local.config.global.stack.terraform_version
       ), 
       null
   )
   context_priority = try(
       try(
-      local.stack.infra.context_priority, 
-      local.config.global.stack.context_priority
+        local.stack.infra.context_priority, 
+        local.config.global.stack.context_priority
       ), 
       null
   )
@@ -82,6 +83,72 @@ module "infra" {
       null
       )
   }
+  additional_project_globs = try(
+      try(
+        local.stack.infra.additional_project_globs, 
+        local.config.global.stack.additional_project_globs
+      ), 
+      null
+  )
+  autoretry = try(
+      try(
+        local.stack.infra.autoretry, 
+        local.config.global.stack.autoretry
+      ), 
+      null
+  )
+  enable_local_preview = try(
+      try(
+        local.stack.infra.enable_local_preview, 
+        local.config.global.stack.enable_local_preview
+      ), 
+      null
+  )
+  enable_well_known_secret_masking = try(
+      try(
+        local.stack.infra.enable_well_known_secret_masking, 
+        local.config.global.stack.enable_well_known_secret_masking
+      ), 
+      null
+  )
+  github_action_deploy = try(
+      try(
+        local.stack.infra.github_action_deploy, 
+        local.config.global.stack.github_action_deploy
+      ), 
+      null
+  )
+  import_state = try(local.stack.infra.import_state, null)
+  import_state_file = try(local.stack.infra.import_state_file, null)
+  manage_state = try(
+      try(
+        local.stack.infra.manage_state, 
+        local.config.global.stack.manage_state
+      ), 
+      null
+  )
+  protect_from_deletion = try(
+      try(
+        local.stack.infra.protect_from_deletion, 
+        local.config.global.stack.protect_from_deletion
+      ), 
+      null
+  )
+  terraform_smart_sanitization = try(
+      try(
+        local.stack.infra.terraform_smart_sanitization, 
+        local.config.global.stack.terraform_smart_sanitization
+      ), 
+      null
+  )
+  terraform_workflow_tool = try(
+      try(
+        local.stack.infra.terraform_workflow_tool, 
+        local.config.global.stack.terraform_workflow_tool
+      ), 
+      null
+  )
+
 }
 
 # INIT

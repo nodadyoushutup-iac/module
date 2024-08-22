@@ -9,6 +9,12 @@ variable "repository" {
   type        = string
 }
 
+variable "branch" {
+  description = "Git branch to use for the stack."
+  type= string
+  default= "main"
+}
+
 #OPTIONAL
 variable "space_id" {
   description = "ID of the space where the stack is created."
@@ -26,12 +32,6 @@ variable "autodeploy" {
   description = "Flag to enable automatic deployment for the stack."
   type= bool
   default= false
-}
-
-variable "branch" {
-  description = "Git branch to use for the stack."
-  type= string
-  default= "main"
 }
 
 variable "description" {
