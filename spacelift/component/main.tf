@@ -1,7 +1,6 @@
 # INFRA
 
 module "infra" {
-    component = var.component
     source  = "spacelift.io/nodadyoushutup/stack/spacelift"
     count = try(contains(local.config.component, var.component)) ? 1 : 0
 
