@@ -64,7 +64,6 @@ variable "context_priority" {
   default     = 100
 }
 
-
 variable "github_enterprise" {
   description = "Configuration for GitHub Enterprise integration."
   type = object({
@@ -80,50 +79,6 @@ variable "ansible" {
   })
   default = null
 }
-
-variable "after_apply" {
-  description = "Hook to run after applying the changes."
-  type        = string
-  default     = null
-}
-
-variable "after_destroy" {
-  description = "Hook to run after destroying the resources."
-  type        = string
-  default     = null
-}
-
-variable "after_init" {
-  description = "Hook to run after initializing the stack."
-  type        = string
-  default     = null
-}
-
-variable "after_perform" {
-  description = "Hook to run after performing actions on the stack."
-  type        = string
-  default     = null
-}
-
-variable "after_plan" {
-  description = "Hook to run after planning changes."
-  type        = string
-  default     = null
-}
-
-variable "after_run" {
-  description = "Hook to run after running the stack."
-  type        = string
-  default     = null
-}
-
-variable "autoretry" {
-  description = "Enable or disable automatic retry of failed operations."
-  type        = bool
-  default     = false
-}
-
-# ADDITIONAL VARIABLES
 
 variable "additional_project_globs" {
   description = "Glob patterns to include additional projects."
@@ -184,3 +139,45 @@ variable "terraform_workflow_tool" {
   type        = string
   default     = "TERRAFORM_FOSS"
 }
+
+# HOOKS
+variable "before" {
+  description = "Hooks to run before various stages."
+  type = object({
+    apply    = optional(string, null)
+    destroy  = optional(string, null)
+    init     = optional(string, null)
+    perform  = optional(string, null)
+    plan     = optional(string, null)
+    run      = optional(string, null)
+  })
+  default = {
+    apply    = null
+    destroy  = null
+    init     = null
+    perform  = null
+    plan     = null
+    run      = null
+  }
+}
+
+variable "after" {
+  description = "Hooks to run after various stages."
+  type = object({
+    apply    = optional(string, null)
+    destroy  = optional(string, null)
+    init     = optional(string, null)
+    perform  = optional(string, null)
+    plan     = optional(string, null)
+    run      = optional(string, null)
+  })
+  default = {
+    apply    = null
+    destroy  = null
+    init     = null
+    perform  = null
+    plan     = null
+    run      = null
+  }
+}
+

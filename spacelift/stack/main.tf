@@ -27,18 +27,18 @@ resource "spacelift_stack" "stack" {
   terraform_workflow_tool = try(var.terraform_workflow_tool, try(local.config.global.stack.terraform_workflow_tool, null))
 
   ## HOOKS ##
-  before_apply = try(var.before_apply, try(local.config.global.stack.before_apply, null))
-  before_destroy = try(var.before_destroy, try(local.config.global.stack.before_destroy, null))
-  before_init = try(var.before_init, try(local.config.global.stack.before_init, null))
-  before_perform = try(var.before_perform, try(local.config.global.stack.before_perform, null))
-  before_plan = try(var.before_plan, try(local.config.global.stack.before_plan, null))
-  before_run = try(var.before_run, try(local.config.global.stack.before_run, null))
-  after_apply = try(var.after_apply, try(local.config.global.stack.after_apply, null))
-  after_destroy = try(var.after_destroy, try(local.config.global.stack.after_destroy, null))
-  after_init = try(var.after_init, try(local.config.global.stack.after_init, null))
-  after_perform = try(var.after_perform, try(local.config.global.stack.after_perform, null))
-  after_plan = try(var.after_plan, try(local.config.global.stack.after_plan, null))
-  after_run = try(var.after_run, try(local.config.global.stack.after_run, null))
+  before_apply = try(var.before.apply, try(local.config.global.stack.before.apply, null))
+  before_destroy = try(var.before.destroy, try(local.config.global.stack.before.destroy, null))
+  before_init = try(var.before.init, try(local.config.global.stack.before.init, null))
+  before_perform = try(var.before.perform, try(local.config.global.stack.before.perform, null))
+  before_plan = try(var.before.plan, try(local.config.global.stack.before.plan, null))
+  before_run = try(var.before.run, try(local.config.global.stack.before.run, null))
+  after_apply = try(var.after.apply, try(local.config.global.stack.after.apply, null))
+  after_destroy = try(var.after.destroy, try(local.config.global.stack.after.destroy, null))
+  after_init = try(var.after.init, try(local.config.global.stack.after.init, null))
+  after_perform = try(var.after.perform, try(local.config.global.stack.after.perform, null))
+  after_plan = try(var.after.plan, try(local.config.global.stack.after.plan, null))
+  after_run = try(var.after.run, try(local.config.global.stack.after.run, null))
   
   dynamic "github_enterprise" {
     for_each = var.github_enterprise != null && var.github_enterprise != {} ? [var.github_enterprise] : []
