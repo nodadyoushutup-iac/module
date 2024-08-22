@@ -32,7 +32,6 @@ resource "spacelift_stack" "stack" {
   before_init = try(var.before.init, try(local.config.global.stack.before.init, null))
   before_perform = try(var.before.perform, try(local.config.global.stack.before.perform, null))
   before_plan = try(var.before.plan, try(local.config.global.stack.before.plan, null))
-  before_run = try(var.before.run, try(local.config.global.stack.before.run, null))
   after_apply = try(var.after.apply, try(local.config.global.stack.after.apply, null))
   after_destroy = try(var.after.destroy, try(local.config.global.stack.after.destroy, null))
   after_init = try(var.after.init, try(local.config.global.stack.after.init, null))
