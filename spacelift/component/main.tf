@@ -35,49 +35,49 @@ module "infra" {
         ["infra", var.component]
     )
 
-    # # OPTIONAL
-    # space_id = try(
-    #     try(
-    #     local.stack.infra.space_id, 
-    #     local.config.global.stack.space_id
-    #     ), 
-    #     null
-    # )
-    # administrative = try(
-    #     try(
-    #     local.stack.infra.administrative, 
-    #     local.config.global.stack.administrative
-    #     ), 
-    #     null
-    # )
-    # autodeploy = try(
-    #     try(
-    #     local.stack.infra.autodeploy, 
-    #     local.config.global.stack.autodeploy
-    #     ), 
-    #     null
-    # )
-    # branch = try(
-    #     try(
-    #     local.stack.infra.branch, 
-    #     local.config.global.stack.branch
-    #     ), 
-    #     null
-    # )
-    # terraform_version = try(
-    #     try(
-    #     local.stack.infra.terraform_version, 
-    #     local.config.global.stack.terraform_version
-    #     ), 
-    #     null
-    # )
-    # context_priority = try(
-    #     try(
-    #     local.stack.infra.context_priority, 
-    #     local.config.global.stack.context_priority
-    #     ), 
-    #     null
-    # )
+    # OPTIONAL
+    space_id = try(
+        try(
+        local.stack.infra.space_id, 
+        local.config.global.stack.space_id
+        ), 
+        null
+    )
+    administrative = try(
+        try(
+        local.stack.infra.administrative, 
+        local.config.global.stack.administrative
+        ), 
+        null
+    )
+    autodeploy = try(
+        try(
+        local.stack.infra.autodeploy, 
+        local.config.global.stack.autodeploy
+        ), 
+        null
+    )
+    branch = try(
+        try(
+        local.stack.infra.branch, 
+        local.config.global.stack.branch
+        ), 
+        null
+    )
+    terraform_version = try(
+        try(
+        local.stack.infra.terraform_version, 
+        local.config.global.stack.terraform_version
+        ), 
+        null
+    )
+    context_priority = try(
+        try(
+        local.stack.infra.context_priority, 
+        local.config.global.stack.context_priority
+        ), 
+        null
+    )
     github_enterprise = { 
         namespace = try(
         try(
