@@ -55,7 +55,7 @@ variable "terraform_version" {
 variable "labels" {
   description = "List of labels to assign to the stack."
   type        = list(string)
-  default     = ["all"]
+  default     = []
 }
 
 variable "github_enterprise" {
