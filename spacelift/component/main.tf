@@ -1,62 +1,87 @@
-# # INFRA
-# resource "spacelift_stack" "stack_infra" {
-#   ## REQUIRED ##
-#   name                = concat(var.name, "_infra")
-#   repository          = var.repository
+# INFRA
 
-#   ## UNIQUE ##
-#   description         = var.description
-#   labels              = concat(var.labels, ["infra"])
-#   project_root        = "infra"
-  
-#   ## OPTIONAL ##
-#   branch              = var.branch
-#   space_id            = var.space_id
-#   administrative      = var.administrative
-#   autodeploy          = var.autodeploy
-#   terraform_version   = var.terraform_version
-  
-#   github_enterprise { 
-#     namespace   = var.github_enterprise.namespace
-#   }
-# }
+module "infra" {
+    component = var.component
+    source  = "spacelift.io/nodadyoushutup/stack/spacelift"
+    count = try(contains(local.config.component, var.component)) ? 1 : 0
 
-# resource "spacelift_context_attachment" "config" {
-#   context_id = "config"
-#   stack_id   = concat(var.name, "_init")
-#   priority   = var.context_priority
-#   depends_on = [spacelift_stack.stack_init]
-# }
+    # REQUIRED
+    name = try(local.config.stack.database.name, concat(var.component, "_infra"))
+    repository = try(local.config.stack.database.repository, var.component)
 
-# # INIT
-# resource "spacelift_stack" "stack_init" {
-#   ## REQUIRED ##
-#   name                = concat(var.name, "_init")
-#   repository          = var.repository
+    # UNIQUE
+    description = try(
+        try(
+            local.config.stack.database.description, 
+            local.config.global.stack.description
+        ), 
+        "Database infrastructure"
+    )
+    project_root = try(
+        try(
+        local.config.stack.database.project_root, 
+        local.config.global.stack.project_root
+        ), 
+        "infra"
+    )
+    labels = try(
+        try(
+        concat(local.config.stack.database.labels, ["infra", var.component]), 
+        concat(local.config.global.stack.labels, ["infra", var.component])
+        ),
+        ["infra", var.component]
+    )
 
-#   ## UNIQUE ##
-#   description         = var.description
-#   labels              = concat(var.labels, ["init"])
-#   project_root        = "init"
-#   ansible {
-#     playbook = "main.yaml"
-#   }
-  
-#   ## OPTIONAL ##
-#   branch              = var.branch
-#   space_id            = var.space_id
-#   administrative      = var.administrative
-#   autodeploy          = var.autodeploy
-#   terraform_version   = var.terraform_version
-  
-#   github_enterprise { 
-#     namespace   = var.github_enterprise.namespace
-#   }
-# }
-
-# resource "spacelift_context_attachment" "config" {
-#   context_id = "config"
-#   stack_id   = concat(var.name, "_init")
-#   priority   = var.context_priority
-#   depends_on = [spacelift_stack.stack_init]
-# }
+    # # OPTIONAL
+    # space_id = try(
+    #     try(
+    #     local.config.stack.database.space_id, 
+    #     local.config.global.stack.space_id
+    #     ), 
+    #     null
+    # )
+    # administrative = try(
+    #     try(
+    #     local.config.stack.database.administrative, 
+    #     local.config.global.stack.administrative
+    #     ), 
+    #     null
+    # )
+    # autodeploy = try(
+    #     try(
+    #     local.config.stack.database.autodeploy, 
+    #     local.config.global.stack.autodeploy
+    #     ), 
+    #     null
+    # )
+    # branch = try(
+    #     try(
+    #     local.config.stack.database.branch, 
+    #     local.config.global.stack.branch
+    #     ), 
+    #     null
+    # )
+    # terraform_version = try(
+    #     try(
+    #     local.config.stack.database.terraform_version, 
+    #     local.config.global.stack.terraform_version
+    #     ), 
+    #     null
+    # )
+    # context_priority = try(
+    #     try(
+    #     local.config.stack.database.context_priority, 
+    #     local.config.global.stack.context_priority
+    #     ), 
+    #     null
+    # )
+    # github_enterprise = { 
+    #     namespace = try(
+    #     try(
+    #         local.config.stack.database.github_enterprise.namespace, 
+    #         local.config.global.stack.github_enterprise.namespace
+    #     ),
+    #     null
+    #     )
+    # }
+}
