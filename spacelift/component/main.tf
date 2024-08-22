@@ -84,9 +84,10 @@ module "infra" {
   }
 }
 
+# INIT
 module "init" {
   source  = "spacelift.io/nodadyoushutup/stack/spacelift"
-  count = try(contains(local.config.component, var.component)) ? 1 : 0
+  count = try(contains(local.config.component, var.component) && var.component != "fortigate", 0) ? 1 : 0
 
   # REQUIRED
   name = try(local.stack.init.name, "${var.component}_init")
@@ -169,6 +170,7 @@ module "init" {
   }
 }
 
+# CONFIG
 module "config" {
   source  = "spacelift.io/nodadyoushutup/stack/spacelift"
   count = try(contains(local.config.component, var.component)) ? 1 : 0
