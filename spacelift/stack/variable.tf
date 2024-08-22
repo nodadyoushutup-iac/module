@@ -51,7 +51,7 @@ variable "terraform_version" {
   type        = string
   default     = null
   validation {
-    condition = var.ansible != null && var.ansible.playbook != null
+    condition     = var.ansible == null || var.ansible.playbook == null
     error_message = "The 'terraform_version' cannot be set if 'ansible' is configured."
   }
 }
