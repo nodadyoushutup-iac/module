@@ -86,6 +86,12 @@ variable "additional_project_globs" {
   default     = []
 }
 
+variable "autoretry" {
+  description = "Enable or disable masking of well-known secrets."
+  type        = bool
+  default     = false
+}
+
 variable "enable_local_preview" {
   description = "Enable or disable local preview mode."
   type        = bool
