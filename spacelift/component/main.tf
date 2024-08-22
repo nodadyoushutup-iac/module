@@ -169,3 +169,89 @@ module "config" {
   }
   depends_on = [module.infra]
 }
+
+module "init" {
+  source  = "spacelift.io/nodadyoushutup/stack/spacelift"
+  count = try(contains(local.init.component, var.component)) ? 1 : 0
+
+  # REQUIRED
+  name = try(local.stack.init.name, "${var.component}_init")
+  repository = try(local.stack.init.repository, var.component)
+
+  # UNIQUE
+  description = try(
+      try(
+          local.stack.init.description, 
+          local.init.global.stack.description
+      ), 
+      "${var.component} inituration"
+  )
+  project_root = try(
+      try(
+      local.stack.init.project_root, 
+      local.init.global.stack.project_root
+      ), 
+      "init"
+  )
+  labels = try(
+      try(
+      concat(local.stack.init.labels, ["init", var.component]), 
+      concat(local.init.global.stack.labels, ["init", var.component])
+      ),
+      ["init", var.component]
+  )
+
+  # OPTIONAL
+  space_id = try(
+      try(
+      local.stack.init.space_id, 
+      local.init.global.stack.space_id
+      ), 
+      null
+  )
+  administrative = try(
+      try(
+      local.stack.init.administrative, 
+      local.init.global.stack.administrative
+      ), 
+      null
+  )
+  autodeploy = try(
+      try(
+      local.stack.init.autodeploy, 
+      local.init.global.stack.autodeploy
+      ), 
+      null
+  )
+  branch = try(
+      try(
+      local.stack.init.branch, 
+      local.init.global.stack.branch
+      ), 
+      null
+  )
+  terraform_version = try(
+      try(
+      local.stack.init.terraform_version, 
+      local.init.global.stack.terraform_version
+      ), 
+      null
+  )
+  context_priority = try(
+      try(
+      local.stack.init.context_priority, 
+      local.init.global.stack.context_priority
+      ), 
+      null
+  )
+  github_enterprise = { 
+      namespace = try(
+      try(
+          local.stack.init.github_enterprise.namespace, 
+          local.init.global.stack.github_enterprise.namespace
+      ),
+      null
+      )
+  }
+  depends_on = [module.infra]
+}
