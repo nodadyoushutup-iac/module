@@ -74,13 +74,13 @@ module "infra" {
     #     ), 
     #     null
     # )
-    # github_enterprise = { 
-    #     namespace = try(
-    #     try(
-    #         local.config.stack.database.github_enterprise.namespace, 
-    #         local.config.global.stack.github_enterprise.namespace
-    #     ),
-    #     null
-    #     )
-    # }
+    github_enterprise = { 
+        namespace = try(
+        try(
+            local.config.stack.database.github_enterprise.namespace, 
+            local.config.global.stack.github_enterprise.namespace
+        ),
+        null
+        )
+    }
 }
