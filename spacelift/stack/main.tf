@@ -18,6 +18,10 @@ resource "spacelift_stack" "stack" {
   github_enterprise { 
     namespace   = var.github_enterprise.namespace
   }
+
+  ansible { 
+    playbook   = var.ansible.playbook
+  }
 }
 
 resource "spacelift_context_attachment" "config" {
