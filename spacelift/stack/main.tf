@@ -9,11 +9,11 @@ resource "spacelift_stack" "stack" {
   project_root        = var.project_root
   
   ## OPTIONAL ##
-  branch              = var.branch
-  space_id            = var.space_id
-  administrative      = var.administrative
-  autodeploy          = var.autodeploy
-  terraform_version   = var.ansible == null || var.ansible == {} ? var.terraform_version : null
+  branch              = try(var.branch, try(local.config.global.stack.branch, null))
+  space_id            = try(var.space_id, try(local.config.global.stack.space_id, null))
+  administrative      = try(var.administrative, try(local.config.global.stack.administrative, null))
+  autodeploy          = try(var.autodeploy, try(local.config.global.stack.autodeploy, null))
+  terraform_version   = var.ansible == null || var.ansible == {} ? try(var.terraform_version, try(local.config.global.stack.terraform_version, null)) : null
   
   dynamic "github_enterprise" {
     for_each = var.github_enterprise != null && var.github_enterprise != {} ? [var.github_enterprise] : []
