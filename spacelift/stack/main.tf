@@ -32,9 +32,9 @@ resource "spacelift_stack" "stack" {
   }
 }
 
-# resource "spacelift_context_attachment" "config" {
-#   context_id = "config"
-#   stack_id   = var.name
-#   priority   = var.context_priority
-#   depends_on = [spacelift_stack.stack]
-# }
+resource "spacelift_context_attachment" "config" {
+  context_id = "config"
+  stack_id   = var.name
+  priority   = var.context_priority
+  depends_on = [spacelift_stack.stack]
+}
