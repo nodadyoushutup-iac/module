@@ -15,12 +15,18 @@ resource "spacelift_stack" "stack" {
   autodeploy          = var.autodeploy
   terraform_version   = var.terraform_version
   
-  github_enterprise { 
-    namespace   = var.github_enterprise.namespace
+  dynamic "github_enterprise" {
+    for_each = var.github_enterprise != null && var.github_enterprise != {} ? [var.github_enterprise] : []
+    content {
+      namespace = github_enterprise.value.namespace
+    }
   }
 
-  ansible { 
-    playbook   = var.ansible.playbook
+  dynamic "ansible" {
+    for_each = var.ansible != null && var.ansible != {} ? [var.ansible] : []
+    content {
+      playbook = ansible.value.playbook
+    }
   }
 }
 
