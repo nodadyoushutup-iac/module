@@ -18,7 +18,7 @@ module "infra" {
             local.stack.infra.description, 
             local.config.global.stack.description
         ), 
-        "Database infrastructure"
+        "${var.component} infrastructure"
     )
     project_root = try(
         try(
