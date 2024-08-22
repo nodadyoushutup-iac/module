@@ -172,7 +172,7 @@ module "config" {
 
 module "init" {
   source  = "spacelift.io/nodadyoushutup/stack/spacelift"
-  count = try(contains(local.init.component, var.component)) ? 1 : 0
+  count = try(contains(local.config.component, var.component)) ? 1 : 0
 
   # REQUIRED
   name = try(local.stack.init.name, "${var.component}_init")
@@ -182,21 +182,21 @@ module "init" {
   description = try(
       try(
           local.stack.init.description, 
-          local.init.global.stack.description
+          local.config.global.stack.description
       ), 
-      "${var.component} inituration"
+      "${var.component} initialization"
   )
   project_root = try(
       try(
       local.stack.init.project_root, 
-      local.init.global.stack.project_root
+      local.config.global.stack.project_root
       ), 
       "init"
   )
   labels = try(
       try(
       concat(local.stack.init.labels, ["init", var.component]), 
-      concat(local.init.global.stack.labels, ["init", var.component])
+      concat(local.config.global.stack.labels, ["init", var.component])
       ),
       ["init", var.component]
   )
@@ -205,42 +205,42 @@ module "init" {
   space_id = try(
       try(
       local.stack.init.space_id, 
-      local.init.global.stack.space_id
+      local.config.global.stack.space_id
       ), 
       null
   )
   administrative = try(
       try(
       local.stack.init.administrative, 
-      local.init.global.stack.administrative
+      local.config.global.stack.administrative
       ), 
       null
   )
   autodeploy = try(
       try(
       local.stack.init.autodeploy, 
-      local.init.global.stack.autodeploy
+      local.config.global.stack.autodeploy
       ), 
       null
   )
   branch = try(
       try(
       local.stack.init.branch, 
-      local.init.global.stack.branch
+      local.config.global.stack.branch
       ), 
       null
   )
   terraform_version = try(
       try(
       local.stack.init.terraform_version, 
-      local.init.global.stack.terraform_version
+      local.config.global.stack.terraform_version
       ), 
       null
   )
   context_priority = try(
       try(
       local.stack.init.context_priority, 
-      local.init.global.stack.context_priority
+      local.config.global.stack.context_priority
       ), 
       null
   )
@@ -248,10 +248,9 @@ module "init" {
       namespace = try(
       try(
           local.stack.init.github_enterprise.namespace, 
-          local.init.global.stack.github_enterprise.namespace
+          local.config.global.stack.github_enterprise.namespace
       ),
       null
       )
   }
-  depends_on = [module.infra]
 }
