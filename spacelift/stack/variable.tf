@@ -25,7 +25,7 @@ variable "administrative" {
 variable "autodeploy" {
   description = "Flag to enable automatic deployment for the stack."
   type= bool
-  default= true
+  default= false
 }
 
 variable "branch" {

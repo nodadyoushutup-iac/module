@@ -9,11 +9,13 @@ resource "spacelift_stack" "stack" {
   project_root        = var.project_root
   
   ## OPTIONAL ##
-  branch              = local.config.global.stack.branch
-  space_id            = try(var.space_id, try(local.config.global.stack.space_id, null))
-  administrative      = try(var.administrative, try(local.config.global.stack.administrative, null))
-  autodeploy          = try(var.autodeploy, try(local.config.global.stack.autodeploy, null))
-  terraform_version   = var.ansible == null || var.ansible == {} ? try(var.terraform_version, try(local.config.global.stack.terraform_version, null)) : null
+  branch = var.branch != null && var.branch != "" ? var.branch : (local.config.global.stack.branch != null && local.config.global.stack.branch != "" ? local.config.global.stack.branch : "main")
+  space_id = var.space_id != null && var.space_id != "" ? var.space_id : (local.config.global.stack.space_id != null && local.config.global.stack.space_id != "" ? local.config.global.stack.space_id : "root")
+
+  administrative = var.administrative != null ? var.administrative : (local.config.global.stack.administrative != null ? local.config.global.stack.administrative : false)
+
+  autodeploy = var.autodeploy != null ? var.autodeploy : (local.config.global.stack.autodeploy != null ? local.config.global.stack.autodeploy : false)
+  terraform_version = var.ansible == null || var.ansible == {} ? (var.terraform_version != null && var.terraform_version != "" ? var.terraform_version : (local.config.global.stack.terraform_version != null && local.config.global.stack.terraform_version != "" ? local.config.global.stack.terraform_version : "1.5.7")) : null
   
   dynamic "github_enterprise" {
     for_each = var.github_enterprise != null && var.github_enterprise != {} ? [var.github_enterprise] : []
