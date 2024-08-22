@@ -13,7 +13,7 @@ resource "spacelift_stack" "stack" {
   space_id            = var.space_id
   administrative      = var.administrative
   autodeploy          = var.autodeploy
-  terraform_version   = var.terraform_version
+  terraform_version   = var.ansible == null || var.ansible == {} ? var.terraform_version : null
   
   dynamic "github_enterprise" {
     for_each = var.github_enterprise != null && var.github_enterprise != {} ? [var.github_enterprise] : []
@@ -23,7 +23,8 @@ resource "spacelift_stack" "stack" {
   }
 
   dynamic "ansible" {
-    for_each = var.ansible != null && var.ansible != {} ? [var.ansible] : []
+    for_each = (
+      var.ansible != null && var.ansible != {} && (var.terraform_version == null || var.terraform_version == "")) ? [var.ansible] : []
     content {
       playbook = ansible.value.playbook
     }

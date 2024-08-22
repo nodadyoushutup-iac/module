@@ -49,7 +49,7 @@ variable "project_root" {
 variable "terraform_version" {
   description = "Terraform version to use for the stack."
   type        = string
-  default     = "1.5.7"
+  default     = null
 }
 
 variable "labels" {
