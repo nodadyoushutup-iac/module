@@ -4,7 +4,7 @@ module "infra" {
   count = try(contains(local.config.component, var.component)) ? 1 : 0
 
   # REQUIRED
-  name = "${var.component}_infra"
+  name = try(local.stack.infra.repository, "${var.component}_infra")
   repository = try(local.stack.infra.repository, var.component)
 
   # UNIQUE
