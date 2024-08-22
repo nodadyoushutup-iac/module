@@ -9,7 +9,7 @@ resource "spacelift_stack" "stack" {
   project_root        = var.project_root
   
   ## OPTIONAL ##
-  branch              = local.config.global.stack.branch
+  branch              = try(var.branch, local.config.global.stack.branch)
   space_id            = try(var.space_id, try(local.config.global.stack.space_id, null))
   administrative      = try(var.administrative, try(local.config.global.stack.administrative, null))
   autodeploy          = try(var.autodeploy, try(local.config.global.stack.autodeploy, null))
