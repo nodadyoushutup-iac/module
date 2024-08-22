@@ -81,3 +81,106 @@ variable "ansible" {
   default = null
 }
 
+variable "after_apply" {
+  description = "Hook to run after applying the changes."
+  type        = string
+  default     = null
+}
+
+variable "after_destroy" {
+  description = "Hook to run after destroying the resources."
+  type        = string
+  default     = null
+}
+
+variable "after_init" {
+  description = "Hook to run after initializing the stack."
+  type        = string
+  default     = null
+}
+
+variable "after_perform" {
+  description = "Hook to run after performing actions on the stack."
+  type        = string
+  default     = null
+}
+
+variable "after_plan" {
+  description = "Hook to run after planning changes."
+  type        = string
+  default     = null
+}
+
+variable "after_run" {
+  description = "Hook to run after running the stack."
+  type        = string
+  default     = null
+}
+
+variable "autoretry" {
+  description = "Enable or disable automatic retry of failed operations."
+  type        = bool
+  default     = false
+}
+
+# ADDITIONAL VARIABLES
+
+variable "additional_project_globs" {
+  description = "Glob patterns to include additional projects."
+  type        = list(string)
+  default     = []
+}
+
+variable "enable_local_preview" {
+  description = "Enable or disable local preview mode."
+  type        = bool
+  default     = false
+}
+
+variable "enable_well_known_secret_masking" {
+  description = "Enable or disable masking of well-known secrets."
+  type        = bool
+  default     = false
+}
+
+variable "github_action_deploy" {
+  description = "Enable or disable GitHub Action deployment."
+  type        = bool
+  default     = true
+}
+
+variable "import_state" {
+  description = "File path for the state to import (sensitive)."
+  type        = string
+  default     = null
+}
+
+variable "import_state_file" {
+  description = "File path for the state to import."
+  type        = string
+  default     = null
+}
+
+variable "manage_state" {
+  description = "Enable or disable state management."
+  type        = bool
+  default     = true
+}
+
+variable "protect_from_deletion" {
+  description = "Enable or disable protection from deletion."
+  type        = bool
+  default     = false
+}
+
+variable "terraform_smart_sanitization" {
+  description = "Enable or disable smart sanitization in Terraform."
+  type        = bool
+  default     = false
+}
+
+variable "terraform_workflow_tool" {
+  description = "Specify the workflow tool to use with Terraform."
+  type        = string
+  default     = "TERRAFORM_FOSS"
+}
