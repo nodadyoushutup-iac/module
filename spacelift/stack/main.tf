@@ -20,5 +20,5 @@ resource "spacelift_stack" "stack" {
 resource "spacelift_context_attachment" "config" {
   context_id = "config"
   stack_id   = var.name
-  context_priority   = var.context_priority
+  priority   = var.context_priority
 }
