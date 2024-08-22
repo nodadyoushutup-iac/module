@@ -149,6 +149,84 @@ module "infra" {
       null
   )
 
+  before_apply = try(
+      try(
+        local.stack.infra.before.apply, 
+        local.config.global.stack.before.apply
+      ), 
+      null
+  )
+  before_destroy = try(
+      try(
+        local.stack.infra.before.destroy, 
+        local.config.global.stack.before.destroy
+      ), 
+      null
+  )
+  before_init = try(
+      try(
+        local.stack.infra.before.init, 
+        local.config.global.stack.before.init
+      ), 
+      null
+  )
+  before_perform = try(
+      try(
+        local.stack.infra.before.perform, 
+        local.config.global.stack.before.perform
+      ), 
+      null
+  )
+  before_plan = try(
+      try(
+        local.stack.infra.before.plan, 
+        local.config.global.stack.before.plan
+      ), 
+      null
+  )
+  after_apply = try(
+      try(
+        local.stack.infra.after.apply, 
+        local.config.global.stack.after.apply
+      ), 
+      null
+  )
+  after_destroy = try(
+      try(
+        local.stack.infra.after.destroy, 
+        local.config.global.stack.after.destroy
+      ), 
+      null
+  )
+  after_init = try(
+      try(
+        local.stack.infra.after.init, 
+        local.config.global.stack.after.init
+      ), 
+      null
+  )
+  after_perform = try(
+      try(
+        local.stack.infra.after.perform, 
+        local.config.global.stack.after.perform
+      ), 
+      null
+  )
+  after_plan = try(
+      try(
+        local.stack.infra.after.plan, 
+        local.config.global.stack.after.plan
+      ), 
+      null
+  )
+  after_run = try(
+      try(
+        local.stack.infra.after.run, 
+        local.config.global.stack.after.run
+      ), 
+      null
+  )
+
 }
 
 # INIT
