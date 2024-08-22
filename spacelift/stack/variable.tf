@@ -58,6 +58,13 @@ variable "labels" {
   default     = []
 }
 
+variable "context_priority" {
+  description = "Priority of the context when attached to the stack."
+  type        = number
+  default     = 100
+}
+
+
 variable "github_enterprise" {
   description = "Configuration for GitHub Enterprise integration."
   type = object({
@@ -65,8 +72,10 @@ variable "github_enterprise" {
   })
 }
 
-variable "context_priority" {
-  description = "Priority of the context when attached to the stack."
-  type        = number
-  default     = 100
+variable "ansible" {
+  description = "Configuration for GitHub Enterprise integration."
+  type = object({
+    playbook = optional(string, null)
+  })
 }
+
