@@ -13,7 +13,7 @@ module "infra" {
     count = try(contains(local.config.component, var.component)) ? 1 : 0
 
     # REQUIRED
-    name = try(concat(var.component, "_infra"), null)
+    name = concat(var.component, "_infra")
     repository = try(local.config.stack.database.repository, var.component)
 
     # UNIQUE
