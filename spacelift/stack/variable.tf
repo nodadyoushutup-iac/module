@@ -150,40 +150,40 @@ variable "terraform_workflow_tool" {
 variable "before" {
   description = "Hooks to run before various stages."
   type = object({
-    apply    = optional(string, null)
-    destroy  = optional(string, null)
-    init     = optional(string, null)
-    perform  = optional(string, null)
-    plan     = optional(string, null)
-    run      = optional(string, null)
+    apply    = optional(list(string), [])
+    destroy  = optional(list(string), [])
+    init     = optional(list(string), [])
+    perform  = optional(list(string), [])
+    plan     = optional(list(string), [])
+    run      = optional(list(string), [])
   })
   default = {
-    apply    = null
-    destroy  = null
-    init     = null
-    perform  = null
-    plan     = null
-    run      = null
+    apply    = []
+    destroy  = []
+    init     = []
+    perform  = []
+    plan     = []
+    run      = []
   }
 }
 
 variable "after" {
   description = "Hooks to run after various stages."
   type = object({
-    apply    = optional(string, null)
-    destroy  = optional(string, null)
-    init     = optional(string, null)
-    perform  = optional(string, null)
-    plan     = optional(string, null)
-    run      = optional(string, null)
+    apply    = optional(list(string), [])
+    destroy  = optional(list(string), [])
+    init     = optional(list(string), [])
+    perform  = optional(list(string), [])
+    plan     = optional(list(string), [])
+    run      = optional(list(string), [])
   })
   default = {
-    apply    = null
-    destroy  = null
-    init     = null
-    perform  = null
-    plan     = null
-    run      = null
+    apply    = []
+    destroy  = []
+    init     = []
+    perform  = []
+    plan     = []
+    run      = []
   }
 }
 
