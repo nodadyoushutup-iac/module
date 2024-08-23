@@ -8,6 +8,10 @@ resource "spacelift_stack" "stack" {
   description         = var.description
   labels              = var.labels
   project_root        = var.project_root
+
+  ## OPTIONAL (No Global)
+  import_state = try(var.import_state, try(local.config.global.stack.import_state, null))
+  import_state_file = try(var.import_state_file, try(local.config.global.stack.import_state_file, null))
   
   ## OPTIONAL ##
   space_id = try(var.space_id, try(local.config.global.stack.space_id, null))
@@ -19,8 +23,6 @@ resource "spacelift_stack" "stack" {
   enable_local_preview = try(var.enable_local_preview, try(local.config.global.stack.enable_local_preview, null))
   enable_well_known_secret_masking = try(var.enable_well_known_secret_masking, try(local.config.global.stack.enable_well_known_secret_masking, null))
   github_action_deploy = try(var.github_action_deploy, try(local.config.global.stack.github_action_deploy, null))
-  import_state = try(var.import_state, try(local.config.global.stack.import_state, null))
-  import_state_file = try(var.import_state_file, try(local.config.global.stack.import_state_file, null))
   manage_state = try(var.manage_state, try(local.config.global.stack.manage_state, null))
   protect_from_deletion = try(var.protect_from_deletion, try(local.config.global.stack.protect_from_deletion, null))
   terraform_smart_sanitization = try(var.terraform_smart_sanitization, try(local.config.global.stack.terraform_smart_sanitization, null))
