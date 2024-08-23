@@ -37,6 +37,10 @@ module "infra" {
       ["infra", var.component]
   )
 
+  # OPTIONAL (No Global)
+  import_state = try(local.stack.infra.import_state, null)
+  import_state_file = try(local.stack.infra.import_state_file, null)
+
   # OPTIONAL
   space_id = try(
       try(
@@ -59,7 +63,6 @@ module "infra" {
       ), 
       null
   )
-  
   terraform_version = try(
       try(
         local.stack.infra.terraform_version, 
@@ -118,8 +121,6 @@ module "infra" {
       ), 
       null
   )
-  import_state = try(local.stack.infra.import_state, null)
-  import_state_file = try(local.stack.infra.import_state_file, null)
   manage_state = try(
       try(
         local.stack.infra.manage_state, 
@@ -148,7 +149,6 @@ module "infra" {
       ), 
       null
   )
-
   before = {
     apply = try(
       try(
@@ -179,7 +179,6 @@ module "infra" {
       null
     )
   }
-  
   after = {
     apply = try(
       try(
@@ -210,7 +209,6 @@ module "infra" {
       null
     )
   }
-
 }
 
 # INIT
